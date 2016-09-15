@@ -1,0 +1,22 @@
+version: '2'
+services:
+  api:
+    build: .
+    ports:
+      - "9000:9000"
+    environment:
+      - MONGODB_URI_DEFAULT=mongodb://db:27017/aqua
+    links:
+      - db
+  frontend:
+    build: ./frontend
+    ports:
+      - "8000:8000"
+    environment:
+      - MONGODB_URI_DEFAULT=mongodb://db:27017/aqua
+    links:
+      - db
+  db:
+    image: mongo
+    ports:
+      - "27017:27017"
